@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import "./playerModel"; // Import player model first
 
 const gameSchema = new mongoose.Schema({
   tournamentId: {
