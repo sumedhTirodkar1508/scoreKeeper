@@ -69,7 +69,7 @@ export default function LeaderboardPage() {
         <p>Loading players...</p>
       ) : (
         <Table>
-          <TableCaption>Find who's leading</TableCaption>
+          <TableCaption>Find who&apos;s leading</TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead className="w-[100px]">Username</TableHead>

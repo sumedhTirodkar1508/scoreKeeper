@@ -131,7 +131,7 @@ export default function LoginPage() {
             asChild
             className="text-blue-500 hover:underline mt-5"
           >
-            <Link href="/signup">Don't have an account? Sign up here</Link>
+            <Link href="/signup">Don&apos;t have an account? Sign up here</Link>
           </Button>
         </CardFooter>
       </Card>
