@@ -4,6 +4,7 @@
 - typescript
 - mongodb
 - mailtrap
+- ShadCN
 
 ## Getting Started
 
@@ -17,21 +18,26 @@ yarn dev
 pnpm dev
 ```
 
-## Assignment
+## Future Scope and Improvements
 
-1. Improve the UI of the application
-2. Add feature of forgot password
+1. Dark Mode
+2. Leaderboard for each Tournament
+3. Add feature of forgot password
+4. Admin user should accept new users signup request
+5. delete a game, add game name, edit players in a team for a game
+6. Revert Button to revert the incremented score. But only when the match status is complete
+7. Timer for each match
 
 ---
 
-### Hint:
+### Upcoming
 
 For forgot password feature.
 
 1. User needs a page to enter his email and submit.
-2. Validate if user exists, if yes, send him same token email that we discussed in this course
-3. User clicks on email and get a page to enter new password with a submit button.
-4. As soon as he click submit button, he is sending you a token and new password.
+2. Validate if user exists, if yes, send him same token email
+3. User clicks on email and gets a page to enter new password with a submit button.
+4. As soon as he clicks the submit button, he is sending you a token and new password.
 5. Verify the token and save the new password after encrypting it.
 
 ---
