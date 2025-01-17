@@ -1,5 +1,6 @@
 import "@/app/globals.css";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,6 +20,7 @@ export default function LoginLayout({
       <body className={inter.className}>
         {children}
         <Toaster />
+        <Analytics />
       </body>
     </html>
   );

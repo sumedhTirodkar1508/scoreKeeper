@@ -2,6 +2,7 @@ import "@/app/globals.css";
 import { Inter } from "next/font/google";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
+import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -27,6 +28,7 @@ export default function RootLayout({
             <div className="flex-1">
               <main className="p-4">{children}</main>
               <Toaster />
+              <Analytics />
             </div>
           </div>
         </SidebarProvider>
