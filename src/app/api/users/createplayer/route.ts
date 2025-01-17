@@ -1,6 +1,6 @@
 import { getDataFromToken } from "@/helpers/getDataFromToken";
 import { connect } from "@/dbConfig/dbConfig";
-import Player from "@/models/playerModels";
+import Player from "@/models/playerModel";
 import { NextRequest, NextResponse } from "next/server";
 import QRCode from "qrcode";
 import fs from "fs";

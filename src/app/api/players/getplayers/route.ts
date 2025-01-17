@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import Player from "@/models/playerModels";
+import Player from "@/models/playerModel";
 import { connect } from "@/dbConfig/dbConfig";
 
 connect();
