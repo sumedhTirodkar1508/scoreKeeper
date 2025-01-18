@@ -19,6 +19,16 @@ const nextConfig = {
           },
         ],
       },
+      {
+        // Optional: Disable caching for static assets (if needed)
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-store, max-age=0",
+          },
+        ],
+      },
     ];
   },
 };
