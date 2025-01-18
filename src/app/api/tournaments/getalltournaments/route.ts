@@ -4,6 +4,8 @@ import { connect } from "@/dbConfig/dbConfig";
 
 connect();
 
+export const dynamic = "force-dynamic"; // Forces the route to be dynamic and prevents caching
+
 export async function GET(request: NextRequest) {
   try {
     // Fetch all tournaments from the database

@@ -5,6 +5,8 @@ import mongoose from "mongoose";
 
 connect();
 
+export const dynamic = "force-dynamic"; // Forces the route to be dynamic and prevents caching
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { tournamentId: string } }
