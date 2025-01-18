@@ -1,13 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { toast } from "react-hot-toast";
 import { getPlayerDetails } from "@/helpers/getPlayerDetails";
+import { useToast } from "@/hooks/use-toast";
 import { Player } from "@/types/player";
-
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Table,
   TableCaption,
@@ -16,10 +13,11 @@ import {
   TableRow,
   TableHead,
   TableCell,
-  TableFooter,
 } from "@/components/ui/table";
 
 export default function LeaderboardPage() {
+  const { toast } = useToast();
+
   const [loading, setLoading] = useState(false);
   const [players, setPlayers] = useState<Player[]>([]);
 
@@ -29,8 +27,17 @@ export default function LeaderboardPage() {
     try {
       const playerData = await getPlayerDetails();
       setPlayers(playerData);
+      toast({
+        title: "Success",
+        description: "Players fetched successfully!",
+      });
     } catch (error) {
       console.error("Error fetching players", error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Error fetching players.",
+      });
     } finally {
       setLoading(false);
     }

@@ -10,7 +10,7 @@ import {
   GalleryVerticalEnd,
 } from "lucide-react";
 import axios from "axios";
-import { toast } from "react-hot-toast";
+import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 
 import {
@@ -66,11 +66,15 @@ const data = {
 
 export function AppSidebar() {
   const router = useRouter();
+  const { toast } = useToast();
 
   const logout = async () => {
     try {
       await axios.get("/api/users/logout");
-      toast.success("Logout successful");
+      toast({
+        title: "Success",
+        description: "Logout successful!",
+      });
       router.push("/login"); // Redirect to the login page after logout
     } catch (error: any) {
       if (error && error.message) {
@@ -78,13 +82,17 @@ export function AppSidebar() {
       } else {
         console.error("An unknown error occurred.");
       }
-      toast.error("Failed to logout. Please try again.");
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to logout. Please try again.",
+      });
     }
   };
 
   return (
     <Sidebar>
-      <SidebarHeader>
+      <SidebarHeader onClick={() => router.push("/leaderboard")}>
         <NavUser user={data.user} />
       </SidebarHeader>
       <SidebarContent>

@@ -105,53 +105,55 @@ export default function CreateGamePage({
   };
 
   return (
-    <div className="flex flex-row min-h-screen py-4 gap-8">
-      {/* Team A Section */}
-      <div className="flex-1">
-        <h2 className="text-xl font-bold mb-2">Team A</h2>
-        {players.map((player) => (
-          <div key={player._id} className="flex items-center space-x-2 mb-2">
-            <input
-              type="checkbox"
-              checked={teamA.some((p) => p._id === player._id)}
-              onChange={() => handleTeamSelect(player, "A")}
-              disabled={teamB.some((p) => p._id === player._id)} // Disable if selected in Team B
-            />
-            <span
-              className={`${
-                teamA.some((p) => p._id === player._id) ? "font-bold" : ""
-              } ${
-                teamB.some((p) => p._id === player._id) ? "line-through" : ""
-              }`}
-            >
-              {player.username}
-            </span>
-          </div>
-        ))}
-      </div>
+    <div className="container mx-auto py-8">
+      <div className="flex flex-row py-4 gap-8">
+        {/* Team A Section */}
+        <div className="flex-1">
+          <h2 className="text-xl font-bold mb-2">Team A</h2>
+          {players.map((player) => (
+            <div key={player._id} className="flex items-center space-x-2 mb-2">
+              <input
+                type="checkbox"
+                checked={teamA.some((p) => p._id === player._id)}
+                onChange={() => handleTeamSelect(player, "A")}
+                disabled={teamB.some((p) => p._id === player._id)} // Disable if selected in Team B
+              />
+              <span
+                className={`${
+                  teamA.some((p) => p._id === player._id) ? "font-bold" : ""
+                } ${
+                  teamB.some((p) => p._id === player._id) ? "line-through" : ""
+                }`}
+              >
+                {player.username}
+              </span>
+            </div>
+          ))}
+        </div>
 
-      {/* Team B Section */}
-      <div className="flex-1">
-        <h2 className="text-xl font-bold mb-2">Team B</h2>
-        {players.map((player) => (
-          <div key={player._id} className="flex items-center space-x-2 mb-2">
-            <input
-              type="checkbox"
-              checked={teamB.some((p) => p._id === player._id)}
-              onChange={() => handleTeamSelect(player, "B")}
-              disabled={teamA.some((p) => p._id === player._id)} // Disable if selected in Team A
-            />
-            <span
-              className={`${
-                teamB.some((p) => p._id === player._id) ? "font-bold" : ""
-              } ${
-                teamA.some((p) => p._id === player._id) ? "line-through" : ""
-              }`}
-            >
-              {player.username}
-            </span>
-          </div>
-        ))}
+        {/* Team B Section */}
+        <div className="flex-1">
+          <h2 className="text-xl font-bold mb-2">Team B</h2>
+          {players.map((player) => (
+            <div key={player._id} className="flex items-center space-x-2 mb-2">
+              <input
+                type="checkbox"
+                checked={teamB.some((p) => p._id === player._id)}
+                onChange={() => handleTeamSelect(player, "B")}
+                disabled={teamA.some((p) => p._id === player._id)} // Disable if selected in Team A
+              />
+              <span
+                className={`${
+                  teamB.some((p) => p._id === player._id) ? "font-bold" : ""
+                } ${
+                  teamA.some((p) => p._id === player._id) ? "line-through" : ""
+                }`}
+              >
+                {player.username}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Finalize Button */}

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { toast } from "react-hot-toast";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,6 +16,8 @@ import {
 
 export default function CreatePlayerPage() {
   const router = useRouter();
+  const { toast } = useToast();
+
   const [player, setPlayer] = useState({ name: "", email: "", username: "" });
   const [loading, setLoading] = useState(false);
 
@@ -23,10 +25,17 @@ export default function CreatePlayerPage() {
     try {
       setLoading(true);
       const response = await axios.post("/api/users/createplayer", player);
-      toast.success("Player created successfully!");
+      toast({
+        title: "Success",
+        description: "Players created successfully!",
+      });
       router.push("/playerlist");
     } catch (error) {
-      toast.error("Error creating player");
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Error creating players.",
+      });
     } finally {
       setLoading(false);
     }
