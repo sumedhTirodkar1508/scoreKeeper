@@ -17,6 +17,7 @@ const playerSchema = new mongoose.Schema({
   },
   qrCodePath: {
     type: String,
+    required: [true, "Please provide a QR Code Path"],
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId, // Reference to the User model

@@ -77,19 +77,24 @@ export default function LoginPage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <Card className="w-[350px]">
-        <CardHeader>
-          <div className="flex justify-center mb-4">
-            <Avatar className="h-25 w-25">
-              <AvatarImage src="../../crosspointx.svg" alt="Logo" />
-              <AvatarFallback>X</AvatarFallback>
-            </Avatar>
-          </div>
-          <CardTitle className="text-3xl text-center">
-            {loading ? "Processing" : "Login"}
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            onLogin();
+          }}
+        >
+          <CardHeader>
+            <div className="flex justify-center mb-4">
+              <Avatar className="h-25 w-25">
+                <AvatarImage src="../../crosspointx.svg" alt="Logo" />
+                <AvatarFallback>X</AvatarFallback>
+              </Avatar>
+            </div>
+            <CardTitle className="text-3xl text-center">
+              {loading ? "Processing" : "Login"}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="email">Email</Label>
@@ -118,24 +123,27 @@ export default function LoginPage() {
                 />
               </div>
             </div>
-          </form>
-        </CardContent>
-        <CardFooter className="flex flex-col">
-          <Button
-            onClick={onLogin}
-            disabled={buttonDisabled || loading}
-            className="w-full bg-[#2970a8] text-white rounded-full py-3 hover:bg-[#6388bb] transition-colors animate-none hover:animate-bounceHover"
-          >
-            {loading ? "Logging in..." : "Login"}
-          </Button>
-          <Button
-            variant="link"
-            asChild
-            className="text-blue-500 hover:underline mt-5"
-          >
-            <Link href="/signup">Don&apos;t have an account? Sign up here</Link>
-          </Button>
-        </CardFooter>
+          </CardContent>
+          <CardFooter className="flex flex-col">
+            <Button
+              type="submit"
+              onClick={onLogin}
+              disabled={buttonDisabled || loading}
+              className="w-full bg-[#2970a8] text-white rounded-full py-3 hover:bg-[#6388bb] transition-colors animate-none hover:animate-bounceHover"
+            >
+              {loading ? "Logging in..." : "Login"}
+            </Button>
+            <Button
+              variant="link"
+              asChild
+              className="text-blue-500 hover:underline mt-5"
+            >
+              <Link href="/signup">
+                Don&apos;t have an account? Sign up here
+              </Link>
+            </Button>
+          </CardFooter>
+        </form>
       </Card>
     </div>
   );

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { getPlayerDetails } from "@/helpers/getPlayerDetails";
 import { Player } from "@/types/player";
+import { jsPDF } from "jspdf";
+import { Eye, Download } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,7 +19,6 @@ import {
   TableRow,
   TableHead,
   TableCell,
-  TableFooter,
 } from "@/components/ui/table";
 import {
   Dialog,
@@ -42,6 +43,8 @@ export default function PlayerListPage() {
   });
   const [deletingPlayerId, setDeletingPlayerId] = useState<string | null>(null);
 
+  const { toast } = useToast(); // Access the toast function
+
   // Fetch players on page load
   const fetchPlayers = async () => {
     setLoading(true);
@@ -59,7 +62,13 @@ export default function PlayerListPage() {
     fetchPlayers();
   }, []);
 
-  const { toast } = useToast(); // Access the toast function
+  // Function to download QR code as PDF
+  const downloadQrCodeAsPdf = (player: Player) => {
+    const doc = new jsPDF();
+    doc.text(`QR Code for ${player.name}`, 10, 10);
+    doc.addImage(player.qrCodePath, "PNG", 10, 20, 50, 50);
+    doc.save(`${player.username}_qr_code.pdf`);
+  };
 
   // Handle edit button click
   const handleEditClick = (player: Player) => {
@@ -183,8 +192,8 @@ export default function PlayerListPage() {
               <TableHead>Name</TableHead>
               <TableHead>Wins</TableHead>
               <TableHead>Losses</TableHead>
+              <TableHead>QR Code</TableHead>
               <TableHead>Actions</TableHead>
-              {/* <TableHead className="text-right">Amount</TableHead> */}
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -196,7 +205,23 @@ export default function PlayerListPage() {
                   <TableCell>{player.name}</TableCell>
                   <TableCell>{player.wins}</TableCell>
                   <TableCell>{player.losses}</TableCell>
-                  <TableCell>
+                  <TableCell className="space-x-0 space-y-2 lg:space-x-2 lg:space-y-0">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => window.open(player.qrCodePath, "_blank")}
+                    >
+                      <Eye size={16} />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => downloadQrCodeAsPdf(player)}
+                    >
+                      <Download size={16} />
+                    </Button>
+                  </TableCell>
+                  <TableCell className="space-x-0 space-y-2 lg:space-x-2 lg:space-y-0">
                     {/* Edit Dialog */}
                     <Dialog
                       open={editingPlayer?._id === player._id}
@@ -348,7 +373,7 @@ export default function PlayerListPage() {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={3} className="text-center">
+                <TableCell colSpan={7} className="text-center">
                   No players found.
                 </TableCell>
               </TableRow>
